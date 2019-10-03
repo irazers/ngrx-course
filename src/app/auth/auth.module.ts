@@ -5,10 +5,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
+
+import { StoreModule } from '@ngrx/store';
+
 import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
-import { StoreModule } from '@ngrx/store';
-import * as fromAuth from './reducers';
+import { authReducer } from './reducers';
 
 @NgModule({
   imports: [
@@ -18,7 +20,7 @@ import * as fromAuth from './reducers';
     MatInputModule,
     MatButtonModule,
     RouterModule.forChild([{path: '', component: LoginComponent}]),
-    StoreModule.forFeature('auth', fromAuth.reducers),
+    StoreModule.forFeature('auth', authReducer),
 
   ],
   declarations: [LoginComponent],

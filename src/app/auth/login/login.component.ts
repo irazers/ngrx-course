@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { Store } from '@ngrx/store';
+
 import { noop } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
 import { AppState } from '../../reducers';
 import { login } from '../auth.actions';
 import { AuthService } from '../auth.service';
@@ -40,8 +43,6 @@ export class LoginComponent implements OnInit {
     this.auth.login(val.email, val.password)
       .pipe(
         tap(user => {
-          console.log(user);
-
           this.store.dispatch(login({user}));
 
           this.router.navigateByUrl('/courses');
