@@ -1,5 +1,6 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
+
 import { CourseActions } from '../action-types';
 import { Course } from '../model/course';
 
