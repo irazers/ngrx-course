@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -15,6 +15,8 @@ import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { authReducer } from './reducers';
 
+export const AUTH_REDUCER = new InjectionToken<any>('Auth Reducer');
+
 @NgModule({
   imports: [
     CommonModule,
@@ -23,11 +25,18 @@ import { authReducer } from './reducers';
     MatInputModule,
     MatButtonModule,
     RouterModule.forChild([{path: '', component: LoginComponent}]),
-    StoreModule.forFeature('auth', authReducer),
+    StoreModule.forFeature('auth', AUTH_REDUCER),
     EffectsModule.forFeature([AuthEffects])
   ],
-  declarations: [LoginComponent],
-  exports: [LoginComponent]
+  declarations: [
+    LoginComponent
+  ],
+  exports: [
+    LoginComponent
+  ],
+  providers: [
+    {provide: AUTH_REDUCER, useValue: authReducer}
+  ]
 })
 export class AuthModule {
   static forRoot(): ModuleWithProviders {
