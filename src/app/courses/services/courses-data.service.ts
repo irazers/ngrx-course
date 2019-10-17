@@ -20,5 +20,5 @@ export class CoursesDataService extends DefaultDataService<Course> {
       .pipe(
         map(result => result['payload'])
       );
-  }
+}
 }

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+
 import { EditCourseDialogComponent } from '../edit-course-dialog/edit-course-dialog.component';
 import { compareCourses, Course } from '../model/course';
 import { CoursesHttpService } from '../services/courses-http.service';
 import { defaultDialogConfig } from '../shared/default-dialog-config';
-
 
 @Component({
   selector: 'home',
