@@ -23,12 +23,11 @@ import { CourseComponent } from './course/course.component';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
 import { EditCourseDialogComponent } from './edit-course-dialog/edit-course-dialog.component';
 import { HomeComponent } from './home/home.component';
-import { Course } from './model/course';
+import { compareCourses, Course } from './model/course';
 import { CourseEntityService } from './services/course-entity.service';
 import { CoursesDataService } from './services/courses-data.service';
 import { CoursesHttpService } from './services/courses-http.service';
 import { CoursesResolver } from './services/courses.resolver';
-
 
 export const coursesRoutes: Routes = [
   {
@@ -49,7 +48,7 @@ export const coursesRoutes: Routes = [
 
 const entityMetadata: EntityMetadataMap = {
   Course: {
-
+    sortComparer: compareCourses
   }
 };
 

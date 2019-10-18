@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, first, tap } from 'rxjs/operators';
 
 import { CourseEntityService } from './course-entity.service';
 
@@ -14,11 +14,16 @@ export class CoursesResolver implements Resolve<boolean> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    
-    return this.courseEntityService.getAll()
-      .pipe(
-        map(courses => !!courses)
-      );
 
+    return this.courseEntityService.loaded$
+      .pipe(
+        tap(loaded => {
+          if (!loaded) {
+            this.courseEntityService.getAll();
+          }
+        }),
+        filter(loaded => !!loaded),
+        first()
+      );
   }
 }

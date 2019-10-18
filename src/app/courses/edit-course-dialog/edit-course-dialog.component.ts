@@ -25,7 +25,7 @@ export class EditCourseDialogComponent {
   loading$: Observable<boolean>;
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<EditCourseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private coursesService: CoursesHttpService) {
@@ -42,10 +42,10 @@ export class EditCourseDialogComponent {
     };
 
     if (this.mode === 'update') {
-      this.form = this.fb.group(formControls);
+      this.form = this.formBuilder.group(formControls);
       this.form.patchValue({...data.course});
     } else if (this.mode === 'create') {
-      this.form = this.fb.group({
+      this.form = this.formBuilder.group({
         ...formControls,
         url: ['', Validators.required],
         iconUrl: ['', Validators.required]
